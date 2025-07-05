@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+    <div class="container pt-5">
+
+        <h1>Lista de tarefas</h1>
+
+<a class="btn btn-success mb-3" th:href="@{/tasks/create}">Nova Tarefa</a>
+<a class="btn btn-info mb-3 ms-2" th:href="@{/tasks/andamento}">Ver Em Andamento</a>
+<a class="btn btn-secondary mb-3 ms-2" th:href="@{/tasks}">Ver Todas</a>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>Título</td>
+        <td>Data</td>
+        <td>Opções</td>
+    </tr>
+
+    <tr th:each="t : ${tasksList}">
+        <td th:text="${t.id}">Id</td>
+        <td><a th:href="@{/tasks/details/{id}(id=${t.id})}" th:text="${t.titulo}">Título</a></td>
+        <td th:text="${#temporals.format(t.data, 'dd/MM/yyyy')}">Data</td>
+        <td>
+            <a th:href="@{/tasks/edit/{id}(id=${t.id})}">editar</a>
+            <a th:href="@{/tasks/remove/{id}(id=${t.id})}">excluir</a>
+        </td>
+    </tr>
+</table>
+
+
+    </div>
+
+</body>
+
+</html>
